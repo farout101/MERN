@@ -22,7 +22,18 @@
 
 <script type="text/babel">
     const Main = () => {
-        return <div>Hello world This is main text</div>
+        return (<div>Hello world This is main text</div>)
     }
+
+    let rootcontainer = document.getElementById('main')
+
+    // Creating react element
+    let e = React.createElement;
+
+    // Create react root element
+    let root = ReactDOM.createRoot(rootcontainer);
+
+    // react root rendering
+    root.render(e(Main))
 </script>
 </html>

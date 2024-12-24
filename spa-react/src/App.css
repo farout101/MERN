@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+}
+
+.App {
+  background-color: teal;
+  color: white;
+  width: 300px;
+  height: 300px;
+}

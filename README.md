@@ -1,4 +1,4 @@
-## JSX
+## JSX (Notes)
 
 - Not exactly the same as HTML.
 - The `class` attribute cannot be used in JSX syntax; use `className` instead.

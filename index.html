@@ -22,7 +22,23 @@
 
 <script type="text/babel">
     const Main = () => {
-        return (<div>Hello world This is main text</div>)
+
+        let name = "Phyo Zaw Linn"
+        let number = 20
+
+        let clickHandler = (e) => {
+            alert('Lee lo click tr lr')
+        }
+
+        return (
+            <div>
+                <h3>Hello {name.toUpperCase()}</h3>
+                <p>{number}</p>
+                <p>{new Date().toDateString()}</p>
+
+                <button onClick={clickHandler}>Click Here</button>
+            </div>
+        )
     }
 
     let rootcontainer = document.getElementById('main')

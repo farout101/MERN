@@ -7,19 +7,19 @@ export default function App() {
   let [posts] = useState([
     {
       id : 1,
-      title : 'this is the first content'
+      title : 'first content'
     },
     {
       id : 2,
-      title : 'this is the second content'
+      title : 'second content'
     },
     {
       id : 3,
-      title : 'this is the third content'
+      title : 'third content'
     },
     {
       id : 4,
-      title : 'this is the fourth content'
+      title : 'fourth content'
     }
   ])
 

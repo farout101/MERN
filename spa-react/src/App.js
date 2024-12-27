@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Navbar from './components/navbar/index'
+import Postlist from './components/postlist/index'
 
 export default function App() {
 
@@ -17,24 +19,10 @@ export default function App() {
     }
   ])
 
-  let deletePost = (id) => {
-    setPost((prevState) => prevState.filter(post => post.id !== id))
-  }
-
   return (
-    <div className='App'>
-      <h1>This is the current testing</h1>
-      <h3>Posts</h3>
-      <ul>
-        {!!posts.length && posts.map((post)=>( // !! changes from any value to boleen value
-          <li key={post.id}>
-            {post.title}-
-            <button onClick={() => deletePost(post.id)}>delete</button> 
-            {/* This is just the function reference */}
-          </li>
-        ))}
-        {!posts.length && <p>No posts availible</p>}
-      </ul>
-    </div>
+    <>
+      <Navbar/>
+      <Postlist/>
+    </>
   )
 }

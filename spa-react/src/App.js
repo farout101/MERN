@@ -2,20 +2,38 @@ import React, { useState } from 'react'
 
 export default function App() {
 
-  let [count,setCount] = useState(0)
+  let [posts,setPost] = useState([
+    {
+      id : 1,
+      title : 'this is the first content'
+    },
+    {
+      id : 2,
+      title : 'this is the second content'
+    },
+    {
+      id : 3,
+      title : 'this is the third content'
+    }
+  ])
 
-  let increment = () => {
-    setCount((prevState)=>prevState+1)
-    setCount((prevState)=>prevState+1)
-    setCount((prevState)=>prevState+1)
-    setCount((prevState)=>prevState+1)
+  let deletePost = (id) => {
+    setPost((prevState) => prevState.filter(post => post.id !== id))
   }
 
   return (
-    <div>
-      <h3>Counter</h3>
-      <h3>Count - {count}</h3>
-      <button onClick={increment}>increment</button>
+    <div className='App'>
+      <h1>This is the current testing</h1>
+      <h3>Posts</h3>
+      <ul>
+        {posts.map((post)=>(
+          <li key={post.id}>
+            {post.title}-
+            <button onClick={() => deletePost(post.id)}>delete</button> 
+            {/* This is just the function reference */}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

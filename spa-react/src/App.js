@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import Model from './components/Model/index'
-import Navbar from './components/navbar/index'
-import Postlist from './components/postlist/index'
+import React, { useState } from 'react';
+import Model from './components/Model/index';
+import Navbar from './components/navbar/index';
+import Postlist from './components/postlist/index';
 
 export default function App() {
+
+  let [showModel,setShowModel] = useState(false);
 
   let [posts] = useState([
     {
@@ -27,11 +29,11 @@ export default function App() {
   return (
     // This thing is called the react fragment
     <> 
-      <Navbar />
+      <Navbar setShowModel={setShowModel}/>
       <Postlist posts={posts}/>
-      <Model>
+      {showModel && <Model setShowModel={setShowModel}>
         <h1>This is from children prop</h1>
-      </Model>
+      </Model>}
     </>
   )
 }

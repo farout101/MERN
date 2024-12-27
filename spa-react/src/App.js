@@ -26,13 +26,14 @@ export default function App() {
       <h1>This is the current testing</h1>
       <h3>Posts</h3>
       <ul>
-        {posts.map((post)=>(
+        {!!posts.length && posts.map((post)=>( // !! changes from any value to boleen value
           <li key={post.id}>
             {post.title}-
             <button onClick={() => deletePost(post.id)}>delete</button> 
             {/* This is just the function reference */}
           </li>
         ))}
+        {!posts.length && <p>No posts availible</p>}
       </ul>
     </div>
   )

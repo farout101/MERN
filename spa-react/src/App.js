@@ -1,47 +1,21 @@
-import { useState } from 'react';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+export default function App() {
 
-  // let name = "Phyo Zaw Linn"
+  let [count,setCount] = useState(0)
 
-  let [name, setName] = useState("Phyo Zaw Linn"); //useState return an array [getter,setterFun]
-
-  let [post] = useState([
-    {
-      id : 1,
-      title : "first post"
-    },
-    {
-      id : 2,
-      title : "second post"
-    },
-    {
-      id : 3,
-      title : "third post"
-    }
-  ])
-
-  let changeName = () => {
-    // name = "Linn Zaw Phyo";
-    setName("Linn Zaw Phyo") // This is the async function
-    // console.log(name)
+  let increment = () => {
+    setCount((prevState)=>prevState+1)
+    setCount((prevState)=>prevState+1)
+    setCount((prevState)=>prevState+1)
+    setCount((prevState)=>prevState+1)
   }
-  
+
   return (
-    <div className="App">
-      <h2>Hello {name}</h2>
-      <button onClick={changeName}>Change name</button>
-      <h3>Posts</h3>
-
-      <ul>
-        {post.map((post)=>(
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-
+    <div>
+      <h3>Counter</h3>
+      <h3>Count - {count}</h3>
+      <button onClick={increment}>increment</button>
     </div>
-  );
+  )
 }
-
-export default App;

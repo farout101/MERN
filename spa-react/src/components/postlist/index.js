@@ -1,12 +1,12 @@
 import React from 'react'
 import './index.css'
 
-export default function Postlist() {
+export default function Postlist({posts}) {
   return (
     <div className='postList'>
-        <div className='single-post'>single post</div>
-        <div className='single-post'>single post</div>
-        <div className='single-post'>single post</div>
+        {posts.map(post=> (
+          <div className='single-post' key={post.id}>{post.title}</div>
+        ))}
       </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Model from './components/Model/index'
 import Navbar from './components/navbar/index'
 import Postlist from './components/postlist/index'
 
@@ -28,6 +29,9 @@ export default function App() {
     <> 
       <Navbar />
       <Postlist posts={posts}/>
+      <Model>
+        <h1>This is from children prop</h1>
+      </Model>
     </>
   )
 }

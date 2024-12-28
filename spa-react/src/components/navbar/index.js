@@ -10,7 +10,7 @@ export default function Navbar({setShowModel}) {
             <ul>
                 <li>Home</li>
                 <li>Posts</li>
-                <li><button onClick={() => setShowModel(true)}>Sign in</button></li>
+                <li><button onClick={() => setShowModel(true)}>Create post</button></li>
             </ul>
         </div>
       </nav>

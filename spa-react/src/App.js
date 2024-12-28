@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Model from './components/Model/index';
 import Navbar from './components/navbar/index';
 import Postlist from './components/postlist/index';
+import PostForm from './components/PostForm/index';
 
 export default function App() {
 
@@ -32,7 +33,7 @@ export default function App() {
       <Navbar setShowModel={setShowModel}/>
       <Postlist posts={posts}/>
       {showModel && <Model setShowModel={setShowModel} Danger={true}>
-        <h1>This is from children prop</h1>
+        <PostForm/>
       </Model>}
     </>
   )

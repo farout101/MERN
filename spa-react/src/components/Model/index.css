@@ -10,9 +10,10 @@
 }
 
 .model-component .model {
+    position: relative;
     background-color: white;
     max-width: 480px;
-    margin: 400px auto;
+    margin: 20% auto;
     padding: 30px;
     border-radius: 10px;
     text-align: center;

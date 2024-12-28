@@ -1,6 +1,6 @@
 /* postsList component */
 
-.postList {
+.postlist-component .postList {
     background-color: lightgreen;
     height: 100vh;
     display: flex;
@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.postList .single-post {
+.postlist-component .postList .single-post {
     flex: 1;
     background-color: blue;
     margin: 20px;

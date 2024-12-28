@@ -3,7 +3,8 @@ import './index.css'
 
 export default function Navbar({setShowModel}) {
   return (
-    <nav>
+    <div className='navbar'>
+      <nav>
         <div className='container'>
             <h1>Logo</h1>
             <ul>
@@ -12,6 +13,7 @@ export default function Navbar({setShowModel}) {
                 <li><button onClick={() => setShowModel(true)}>Sign in</button></li>
             </ul>
         </div>
-    </nav>
+      </nav>
+    </div>
   )
 }

@@ -5,7 +5,7 @@ export default function Postlist({posts}) {
 
   return (
     <div className='postlist-component'>
-      <div className='postList'>
+      <div className='postList container'>
         {posts.map(post=> (
           <div className='single-post' key={post.id}>{post.title}</div>
         ))}

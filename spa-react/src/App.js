@@ -31,7 +31,7 @@ export default function App() {
     <> 
       <Navbar setShowModel={setShowModel}/>
       <Postlist posts={posts}/>
-      {showModel && <Model setShowModel={setShowModel}>
+      {showModel && <Model setShowModel={setShowModel} Danger={true}>
         <h1>This is from children prop</h1>
       </Model>}
     </>

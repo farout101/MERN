@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Model from './components/Model/index';
 import Navbar from './components/navbar/index';
-import Postlist from './components/postlist/index';
 import PostForm from './components/PostForm/index';
+import Postlist from './components/postlist/index';
 
 export default function App() {
 
   let [showModel,setShowModel] = useState(false);
 
-  let [posts] = useState([
+  let [posts,setPosts] = useState([
     {
       id : 1,
       title : 'first content'
@@ -17,15 +17,12 @@ export default function App() {
       id : 2,
       title : 'second content'
     },
-    {
-      id : 3,
-      title : 'third content'
-    },
-    {
-      id : 4,
-      title : 'fourth content'
-    }
   ])
+
+  let addPost = (post) => {
+    setPosts((prevState) => [...prevState,post])
+    setShowModel(false)
+  }
 
   return (
     // This thing is called the react fragment
@@ -33,7 +30,7 @@ export default function App() {
       <Navbar setShowModel={setShowModel}/>
       <Postlist posts={posts}/>
       {showModel && <Model setShowModel={setShowModel} Danger={true}>
-        <PostForm/>
+        <PostForm addPost={addPost}/>
       </Model>}
     </>
   )

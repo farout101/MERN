@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './index.css'
 
-export default function PostForm() { //the function name can't be index anyway
+export default function PostForm({addPost}) { //the function name can't be index anyway
   
     let [title,setTitle] = useState("")
 
@@ -13,7 +13,7 @@ export default function PostForm() { //the function name can't be index anyway
         setTitle("")
     }
 
-    let uploadPost = (e) => {
+    let uploadPost = (e) => { // refreshing is the html default nature and there's nothing to do with react
         e.preventDefault() // prevent refresh page
 
         let post = {
@@ -22,6 +22,8 @@ export default function PostForm() { //the function name can't be index anyway
         }
 
         console.log(post)
+        resetForm()
+        addPost(post)
     }
 
     return (

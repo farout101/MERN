@@ -1,0 +1,16 @@
+{
+    "trips" : [
+        {
+            "name" : "2 nights in Bagan",
+            "price" : 1000000
+        },
+        {
+            "name" : "2 nights in Myitkyina",
+            "price" : 1000000
+        },
+        {
+            "name" : "2 nights in Chaungtha",
+            "price" : 1000000
+        }
+    ]
+}

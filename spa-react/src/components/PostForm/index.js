@@ -1,15 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './index.css';
 
 export default function PostForm({addPost}) { //the function name can't be index anyway
   
     let refTitle = useRef();
 
+    let [status,setStatus] = useState("upcoming")
+
     // let [title,setTitle] = useState("")
 
     // let onChangeHandler = (e) => {
     //     setTitle(e.target.value)
     // }
+
+    let changeStatus = (e) => {
+        setStatus(e.target.value)
+        console.log(status)
+    }
 
     let resetForm = () => {
         refTitle.current.value = ""
@@ -22,7 +29,8 @@ export default function PostForm({addPost}) { //the function name can't be index
 
         let post = {
             id : Math.floor(Math.random()*10000),
-            title : refTitle.current.value
+            title : refTitle.current.value,
+            status : status
         }
 
         console.log(post)
@@ -36,6 +44,14 @@ export default function PostForm({addPost}) { //the function name can't be index
         <div className='form-control'>
             <label htmlFor=''>Title</label>
             <input type="text" ref={refTitle} />
+        </div>
+        <div className='form-control'>
+            <label htmlFor=''>Status</label>
+            <select value={status} onChange={changeStatus}>
+                <option value="dropped">Dropped</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="upcoming">Upcoming</option>
+            </select>
         </div>
         <button type="button" onClick={resetForm}>Reset Form</button>
         <div className='form-control'>

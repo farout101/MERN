@@ -11,11 +11,13 @@ export default function App() {
   let [posts,setPosts] = useState([
     {
       id : 1,
-      title : 'first content'
+      title : 'first content',
+      status : 'upcoming'
     },
     {
       id : 2,
-      title : 'second content'
+      title : 'second content',
+      status : 'dropped'
     },
   ])
 

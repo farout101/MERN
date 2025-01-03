@@ -4,20 +4,22 @@ export default function Index() {
 
     let [trips, setTrips] = useState([])
 
+    let [url,setUrl] = useState('http://localhost:3000/trips/')
+
     useEffect(()=>{
-        fetch('http://localhost:3000/trips')
+        fetch(url)
         .then(res => res.json())
         .then(data => {
             setTrips (data)
         })
-    },[])
+    },[url])
 
     return (
         <div>
             <h1>Ready to Go?</h1>
 
-            <button>All</button>
-            <button>Filter by location</button>
+            <button onClick={() => setUrl('http://localhost:3000/trips/')}>All</button>
+            <button onClick={() => setUrl('http://localhost:3000/trips/?location=Myanmar')}>Filter by Myanmar</button>
 
             <ul>
                 {trips.map(trip => (

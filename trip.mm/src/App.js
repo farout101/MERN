@@ -1,10 +1,9 @@
 import './App.css';
+import TripList from './components/TripList/index.js';
 
 function App() {
   return (
-    <div className="App">
-      <h1>hello react</h1>
-    </div>
+    <TripList/>
   );
 }
 

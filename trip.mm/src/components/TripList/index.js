@@ -16,11 +16,16 @@ export default function Index() {
         <div>
             <h1>Ready to Go?</h1>
 
+            <button>All</button>
+            <button>Filter by location</button>
+
             <ul>
-                <li>
-                    <h3>2 nights to chaung tha</h3>
-                    <p>price - 100,000 mmk</p>
+                {trips.map(trip => (
+                <li key={trip.id}>
+                    <h3>{trip.name}</h3>
+                    <p>price - {trip.price}</p>
                 </li>
+                ))}
             </ul>
         </div>
     )

@@ -1,16 +1,28 @@
 {
     "trips" : [
         {
+            "id" : 1,
             "name" : "2 nights in Bagan",
-            "price" : 1000000
+            "price" : 1000000,
+            "location" : "Myanmar"
         },
         {
+            "id" : 2,
             "name" : "2 nights in Myitkyina",
-            "price" : 1000000
+            "price" : 1000000,
+            "location" : "Myanmar"
         },
         {
+            "id" : 3,
             "name" : "2 nights in Chaungtha",
-            "price" : 1000000
+            "price" : 1000000,
+            "location" : "Myanmar"
+        },
+        {
+            "id" : 4,
+            "name" : "2 nights in Bangkok",
+            "price" : 1000000,
+            "location" : "Thailand"
         }
     ]
 }

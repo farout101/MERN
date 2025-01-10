@@ -16,7 +16,7 @@ export default function Index() {
     //     })
     // },[url])
 
-    let { data : trips, loading, error } = useFetch(url)
+    let { data : trips, loading, error } = useFetch(url, { type:"GET" })
 
     return (
         <div className='container'>

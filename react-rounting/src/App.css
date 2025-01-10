@@ -21,4 +21,9 @@ nav ul li {
 a {
   text-decoration: none;
   color: #555555;
+  transition: color 0.3s ease; /* Add transition property */
+}
+
+a.active {
+  color: lightblue;
 }

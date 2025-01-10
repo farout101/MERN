@@ -1,0 +1,24 @@
+.App {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.App nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 20px;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #555555;
+}

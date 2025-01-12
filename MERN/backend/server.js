@@ -9,6 +9,7 @@ require('dotenv').config()
 const morgan = require('morgan')
 
 const express = require('express')
+const recipeRoutes = require('./routes/recipes')
 
 // define the express app
 const app = express()
@@ -16,9 +17,9 @@ const app = express()
 // we'll use the dev version of morgan
 app.use(morgan('dev'))
 
-app.get('/',(req,res) => {
-    return res.json({hello :"Hello world"})
-})
+// Use the routes
+// We just have to call use because the processing is happening inside the other folder
+app.use('/api/recipes',recipeRoutes)
 
 // The PORT number came from the .env file with the help of dotenv package
 app.listen(process.env.PORT, () => { 

@@ -1,4 +1,5 @@
 const Recipe = require("../models/Recipe")
+const mongoose = require('mongoose')
 
 const RecipeController = {
     index : async (req,res) => {
@@ -24,22 +25,48 @@ const RecipeController = {
     show : async (req,res) => {
         try {
             let id = req.params.id
+            if(!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ msg : 'Not a valid ID!' })
+            }
             let recipe = await Recipe.findById(id)
-
+            if(!recipe) {
+                return res.status(404).json({ msg : 'Recipe not found' })
+            }
             return res.json(recipe)
         } catch(e) {
-            return res.status(404).json({ msg : "Cannot find the Recipe ID"})
+            return res.status(404).json({ msg : "Internal Server Error!"})
         }
     },
-    delete : (req,res) => {
-        return res.json({
-            msg : "Delete single recipe"
-        })
+    delete : async (req,res) => {
+        try {
+            let id = req.params.id
+            if(!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ msg : 'Not a valid ID!' })
+            }
+            let recipe = await Recipe.findByIdAndDelete(id)
+            if(!recipe) {
+                return res.status(404).json({ msg : 'Recipe not found' })
+            }
+            return res.json({ msg : `The Recipe ID - '${recipe.id}' has been deleted!` })
+        } catch(e) {
+            return res.status(404).json({ msg : "Internal Server Error!"})
+        }
     },
-    update : (req,res) => {
-        return res.json({
-            msg : "Update recipe"
-        })
+    update : async (req,res) => {
+        try {
+            let id = req.params.id
+            if(!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ msg : 'Not a valid ID!' })
+            }
+            let recipe = await Recipe.findByIdAndUpdate(id)
+            if(!recipe) {
+                return res.status(404).json({ msg : 'Recipe not found' })
+            }
+            let updatedRecipe = await Recipe.findByIdAndUpdate(id, req.body, { new: true })
+            return res.json(updatedRecipe)
+        } catch(e) {
+            return res.status(404).json({ msg : "Internal Server Error!"})
+        }
     }
 
 }

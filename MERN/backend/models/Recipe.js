@@ -16,9 +16,9 @@ const RecipeSchema = new Schema({
         type : Array,
         required : true
     }
-})
+}, { timestamps : true })
 
 // As the naming convention 
 // The name of the model must be the name of the file
 // Must be singular
-module.exports = mongoose.model("Recipe", RecipeSchema)
+module.exports = mongoose.model("Recipe", RecipeSchema) // recipes

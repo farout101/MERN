@@ -19,6 +19,6 @@ const RecipeSchema = new Schema({
 })
 
 // As the naming convention 
-// the name of the model must be the name of the file
-// and must be singular
+// The name of the model must be the name of the file
+// Must be singular
 module.exports = mongoose.model("Recipe", RecipeSchema)

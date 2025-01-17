@@ -10,7 +10,6 @@ const RecipeController = {
     store : async (req,res) => {
         try {
             const {title, description, ingredients} = req.body
-
             // The .create method from the mongodb create data into the mongodb
             const recipe = await Recipe.create({
                 title,

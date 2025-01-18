@@ -10,7 +10,7 @@ const morgan = require('morgan')
 
 const express = require('express')
 const recipeRoutes = require('./routes/recipes')
-
+const cors = require('cors')
 // define the express app
 const app = express()
 
@@ -29,6 +29,8 @@ mongoose.connect(mongoURL).then(() => {
         console.log("Express is running on local host "+ process.env.PORT)
     })
 })
+
+app.use(cors()) // Only for local development
 
 // This line is used to make sure the raw data is turned into JSON
 app.use(express.json())

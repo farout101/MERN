@@ -4,9 +4,10 @@ import {
 
 import App from "../App";
 import About from "../pages/about";
+import BlogDetail from "../pages/blogDetail";
 import Contact from "../pages/contact";
 import Home from "../pages/home";
-
+import NotFound from "../pages/notFound";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,15 @@ const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact/>
+            },
+            {
+                // Can accept dynamic routes with ":" in react
+                path: '/blogs/:id',
+                element: <BlogDetail/>
+            },
+            {
+                path: '*',
+                element: <NotFound/>
             }
         ]
     }

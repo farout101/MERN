@@ -9,6 +9,7 @@ function App() {
       <nav>
         <h1>My blog</h1>
         <ul>
+          {/* NavLink is used for navigation and it adds an "active" class to the link when it matches the current URL */}
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
           <li><NavLink to="/contact">Contact</NavLink></li>

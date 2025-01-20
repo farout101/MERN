@@ -1,9 +1,12 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import plus from '../assets/plus.svg'
 import Ingredients from '../components/ingredients'
 
 export default function RecipeForm() {
+
+  let navigate = useNavigate()
 
   let [ingredients,setIngredients] = useState([])
   let [newingredients,setNewIngredients] = useState('')
@@ -25,9 +28,11 @@ export default function RecipeForm() {
         ingredients
       } 
       let res = await axios.post('http://localhost:4000/api/recipes', recipe)
-      console.log(res)
+      if(res.status === 200) {
+        navigate('/')
+      }
     } catch(e) {
-      setErrors(e.response.data.errors)
+      setErrors(Object.keys(e.response.data.errors))
     }
   }
 
@@ -35,6 +40,11 @@ export default function RecipeForm() {
     <div className='mx-auto max-w-md border-2 border-white p-4'>
         <h1 className='mb-6 text-2xl font-bold text-orange-500 text-center'>Recipe Create Form</h1>
         <form action="" className='space-y-5' onSubmit={createRecipe}>
+            <ul className='list-disc pl-4'>
+              {!!errors.length && errors.map((error,i) => (
+                <li className='text-red-500 text-sm' key={i}>{error} is invalid value!</li>
+              ))}
+            </ul>
             <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder='Recipe Title' className='w-full p-1'/>
             <textarea value={description} onChange={e => setDescription(e.target.value)} name="" id="" placeholder='Recipe Description' className='w-full p-1' rows="5"></textarea>
             <div className='flex space-x-2 items-center'>

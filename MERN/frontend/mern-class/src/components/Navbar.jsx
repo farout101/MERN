@@ -11,6 +11,7 @@ export default function Navbar() {
             <li><Link to="/" className="hover:text-orange-500 transaction duration-300 ease-in-out">Home</Link></li>
             <li><Link to="/about" className="hover:text-orange-500 transaction duration-300 ease-in-out">About</Link></li>
             <li><Link to="/contact" className="hover:text-orange-500 transaction duration-300 ease-in-out">Contact</Link></li>
+            <li><Link to="/recipe/create" className="hover:text-orange-500 transaction duration-300 ease-in-out">Create Recipe</Link></li>
         </ul>
     </nav>  
   )

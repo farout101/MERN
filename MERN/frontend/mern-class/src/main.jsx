@@ -5,6 +5,7 @@ import './index.css';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Home from './pages/Home.jsx';
+import RecipeForm from './pages/RecipeForm.jsx'
 
 import App from './App.jsx';
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: "/recipe/create",
+        element: <RecipeForm />
       }
     ]
   }

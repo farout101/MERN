@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 export default function Pagination({links,page}) {
   return (
@@ -16,8 +18,9 @@ export default function Pagination({links,page}) {
                                 <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
                             </svg>
                         </a>
+
                         {links.loopableLinks.map(link => {
-                            if (links.number == page) {
+                            if (link.number == page) {
                                 return (
                                     <Link key={link.number} to={`/?page=${link.number}`} aria-current="page" className="relative z-10 inline-flex items-center bg-orange-400 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400">{link.number}</Link>
                                 )

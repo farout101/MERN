@@ -5,12 +5,11 @@ import RecipeCard from '../components/RecipeCard'
 
 export default function Home() {
 
+  let [links,setLinks] = useState(null)
   let [recipes,setRecipes] = useState([])
   let location = useLocation()
   let searchQuery = new URLSearchParams(location.search)
   let page = searchQuery.get('page')
-
-  console.log(location)
 
   // The callback inside useEffe ct should not be async
   useEffect(() => {
@@ -21,7 +20,12 @@ export default function Home() {
       if(response.ok){
         // await is required for json because of the time it takes
         let data = await response.json()
-        setRecipes(data)
+        setLinks(data.links)
+        setRecipes(data.data)
+
+        //Scroll to top function
+        //Use this along with Pagination
+        window.scroll({top:0, left:0, behavior: "smooth"})
       }
     }
 
@@ -29,24 +33,16 @@ export default function Home() {
   // The dependency array is empty to fetch the first ever data to the webpage
   },[page])
 
-  let links = {
-    nextPage : true,
-    previousPage : false,
-    currentPage : 1,
-    loopableLinks : [
-      {number : 1},
-      {number : 2},
-      {number : 3}
-    ]
-  }
-
   return (
     <div className='space-y-4'>
-      {recipes.length && ( recipes.map(recipe => (
+      {/* this should be condition instead of just looking for the length of the recipe */}
+      {!!recipes.length && ( recipes.map(recipe => (
           <RecipeCard recipe={recipe}  key={recipe._id}/>
         ))
       )}
-      <Pagination links={links}/>
+      {/* 1 is the defaut prop for page */}
+      {/* !!links is used to prevent from looping the empty array of links */}
+      {!!links && <Pagination links={links} page={page || 1}/>}
     </div>
   )
 }

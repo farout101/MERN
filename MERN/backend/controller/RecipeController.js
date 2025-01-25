@@ -11,7 +11,23 @@ const RecipeController = {
         .limit(limit)
         .sort({ createdAt : -1})
 
-        return res.json(recipes)
+        let links = {
+            nextPage : true,
+            previousPage : false,
+            currentPage : 1,
+            loopableLinks : [
+                { number : 1 },
+                { number : 2 },
+                { number : 3 },
+            ]
+        }
+
+        let response = {
+            links,
+            data : recipes
+        }
+
+        return res.json(response)
     },
     // Our function must be async cuz we used await
     store : async (req,res) => {

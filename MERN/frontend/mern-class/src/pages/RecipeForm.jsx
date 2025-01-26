@@ -1,18 +1,32 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import plus from '../assets/plus.svg'
 import Ingredients from '../components/ingredients'
 
 export default function RecipeForm() {
 
+  let {id} = useParams()
+  console.log(id)
   let navigate = useNavigate()
-
   let [ingredients,setIngredients] = useState([])
   let [newingredients,setNewIngredients] = useState('')
   let [title,setTitle] = useState('')
   let [description,setDescription] = useState('')
   let [errors,setErrors] = useState([])
+
+  useEffect(() => {
+    let fetchRecipe = async () => {
+      if(id) {
+        let res = await axios.get('http://localhost:4000/recipes/' + id)
+        if(res.status === 200) {
+          console.log(res.data)
+        }
+      }
+    }
+    // Don't forget to call the function 
+    fetchRecipe()
+  }, [id])
 
   let addIngredients = () => {
      setIngredients(prev => [newingredients,...prev])
@@ -37,7 +51,7 @@ export default function RecipeForm() {
   }
 
   return (
-    <div className='mx-auto max-w-md border-2 border-white p-4'>
+    <div className='mx-auto max-w-md border-2 border-white p-4 rounded-2xl'>
         <h1 className='mb-6 text-2xl font-bold text-orange-500 text-center'>Recipe Create Form</h1>
         <form action="" className='space-y-5' onSubmit={createRecipe}>
             <ul className='list-disc pl-4'>

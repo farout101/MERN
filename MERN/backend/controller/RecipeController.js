@@ -11,21 +11,30 @@ const RecipeController = {
         .limit(limit)
         .sort({ createdAt : -1})
 
+        let totalRecipeCount = await Recipe.countDocuments()
+
+        let totalPagesCount = Math.ceil(totalRecipeCount/limit)
+
         let links = {
-            nextPage : true,
-            previousPage : false,
-            currentPage : 1,
-            loopableLinks : [
-                { number : 1 },
-                { number : 2 },
-                { number : 3 },
-            ]
+            nextPage : totalPagesCount == page ? false : true,
+            previousPage : page == 1 ? false : true,
+            currentPage : page,
+            loopableLinks : []
+        }
+
+        //generate Loopable links
+        for (let index = 0; index < totalPagesCount; index++) {
+           links.loopableLinks.push({number : index +1})
         }
 
         let response = {
             links,
             data : recipes
         }
+
+        console.log(`Total_Pages -  ${totalPagesCount}`)
+        console.log(`Previous_Page - ${links.previousPage} `)
+        console.log(`Next_Page - ${links.nextPage}`)
 
         return res.json(response)
     },

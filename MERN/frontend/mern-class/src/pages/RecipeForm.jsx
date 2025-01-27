@@ -18,9 +18,11 @@ export default function RecipeForm() {
   useEffect(() => {
     let fetchRecipe = async () => {
       if(id) {
-        let res = await axios.get('http://localhost:4000/recipes/' + id)
+        let res = await axios.get('http://localhost:4000/api/recipes/' + id)
         if(res.status === 200) {
-          console.log(res.data)
+          setTitle(res.data.title)
+          setDescription(res.data.description)
+          setIngredients(res.data.ingredients)
         }
       }
     }

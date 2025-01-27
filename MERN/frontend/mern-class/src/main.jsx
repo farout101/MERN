@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
@@ -36,7 +35,7 @@ const router = createBrowserRouter([
         element: <RecipeForm />
       },
       {
-        path: "/recipe/edit/:id",
+        path: "/recipes/edit/:id",
         element: <RecipeForm/>
       }
     ]
@@ -45,7 +44,5 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
 );

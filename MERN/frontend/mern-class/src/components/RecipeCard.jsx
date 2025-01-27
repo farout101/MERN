@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Ingredients from './ingredients'
 
 export default function RecipeCard({recipe, onDeleted}) {
@@ -17,7 +18,10 @@ export default function RecipeCard({recipe, onDeleted}) {
       <div className='space-y-4'>
         <div className='flex justify-between'>
           <h3 className='text-xl font-bold text-orange-500'>{recipe.title}</h3>
-          <button onClick={deleteRecipe} className='bg-red-500 font-mono px-4 py-0.5 rounded-xl hover:bg-red-800 text-white transaction duration-300 ease-in-out'>Delete</button>
+          <div className='space-x-2'>
+            <Link to={`/recipes/edit/${recipe._id}`} className='bg-yellow-500 font-mono px-4 py-0.5 rounded-xl hover:bg-yellow-800 text-white transaction duration-300 ease-in-out'>Edit</Link>
+            <button onClick={deleteRecipe} className='bg-red-500 font-mono px-4 py-0.5 rounded-xl hover:bg-red-800 text-white transaction duration-300 ease-in-out'>Delete</button>
+          </div>
         </div>
         <p>{recipe.description}</p>
         <Ingredients ingredients={recipe.ingredients}/>

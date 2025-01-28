@@ -35,7 +35,7 @@ export default function RecipeForm() {
      setNewIngredients('')
   }
 
-  let createRecipe = async (e) => {
+  let submit = async (e) => {
     try {
       e.preventDefault()
       let recipe = {
@@ -43,7 +43,13 @@ export default function RecipeForm() {
         description,
         ingredients
       } 
-      let res = await axios.post('http://localhost:4000/api/recipes', recipe)
+
+      let res
+      if(id) {
+        res = await axios.patch('http://localhost:4000/api/recipes/' + id, recipe)
+      } else {
+        res = await axios.post('http://localhost:4000/api/recipes', recipe)
+      }
       if(res.status === 200) {
         navigate('/')
       }
@@ -54,8 +60,8 @@ export default function RecipeForm() {
 
   return (
     <div className='mx-auto max-w-md border-2 border-white p-4 rounded-2xl'>
-        <h1 className='mb-6 text-2xl font-bold text-orange-500 text-center'>Recipe Create Form</h1>
-        <form action="" className='space-y-5' onSubmit={createRecipe}>
+        <h1 className='mb-6 text-2xl font-bold text-orange-500 text-center'>Recipe {id? 'Edit' : 'Create'} Form</h1>
+        <form action="" className='space-y-5' onSubmit={submit}>
             <ul className='list-disc pl-4'>
               {!!errors.length && errors.map((error,i) => (
                 <li className='text-red-500 text-sm' key={i}>{error} is invalid value!</li>
@@ -70,7 +76,7 @@ export default function RecipeForm() {
             <div>
               <Ingredients ingredients={ingredients}/>
             </div>
-            <button type='submit' className='w-full px-3 py-1 rounded-xl border-2 bg-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 b- transaction duration-300 ease-in-out'>Create Recipe</button>
+            <button type='submit' className='w-full px-3 py-1 rounded-xl border-2 bg-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 b- transaction duration-300 ease-in-out'>{id? 'Update' : 'Create'} Recipe</button>
         </form>
     </div>
   )

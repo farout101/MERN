@@ -10,6 +10,8 @@ const morgan = require('morgan')
 
 const express = require('express')
 const recipeRoutes = require('./routes/recipes')
+const userRoutes = require('./routes/users')
+
 const cors = require('cors')
 // define the express app
 const app = express()
@@ -41,3 +43,4 @@ app.use(morgan('dev'))
 // Use the routes
 // We just have to call use because the processing is happening inside the other folder
 app.use('/api/recipes',recipeRoutes)
+app.use('/api/users',userRoutes)

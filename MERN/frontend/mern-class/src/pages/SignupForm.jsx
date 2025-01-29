@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function SignupForm() {
 
@@ -8,6 +8,8 @@ export default function SignupForm() {
     let [email,setEmail] = useState('')
     let [password,setPassword] = useState('')
     let [errors,setErrors] = useState(null)
+
+    let navigate = useNavigate()
 
     let register = async (e) => {
         try {
@@ -22,7 +24,9 @@ export default function SignupForm() {
             res = await axios.post('http://localhost:4000/api/users/register', data, {
                 withCredentials : true
             })
-            console.log(errors)
+            if(res.status === 200) {
+                navigate('/')
+            }
         } catch (e) {
             setErrors(e.response.data.errors)
         }

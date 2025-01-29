@@ -11,7 +11,7 @@ const UserController = {
         try {
             let user = await User.register(req.body.name, req.body.email, req.body.password)
             let token = createToken(user._id)
-            res.cookie('jwt',token)
+            res.cookie('jwt',token, { httpOnly : true, maxAge : 3 * 24 * 60 * 60 * 1000}) // maxAge here accept with miliseconds
             return res.json({ data: { user, token } })
         } catch (e) {
             return res.status(400).json({ error : e.message })

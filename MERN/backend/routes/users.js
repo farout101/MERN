@@ -8,7 +8,7 @@ const UserController = require('../controller/UserController')
 router.post('/login', UserController.login)
 router.post('/register', [
     body('name').notEmpty(),
-    body('email').notEmpty(),
+    body('email').notEmpty().isEmail(),
     body('password').notEmpty()
 ],ErrorMessageHandler,UserController.register)
 

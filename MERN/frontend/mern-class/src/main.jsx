@@ -5,6 +5,8 @@ import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Home from './pages/Home.jsx';
 import RecipeForm from './pages/RecipeForm.jsx';
+import SignupForm from './pages/SignupForm.jsx';
+import SigninForm from './pages/SigninForm.jsx';
 
 import App from './App.jsx';
 
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/recipes/edit/:id",
         element: <RecipeForm/>
+      },
+      {
+        path: "/sign-up",
+        element: <SignupForm/>
+      },
+      {
+        path: "sign-in",
+        element: <SigninForm/>
       }
     ]
   }

@@ -14,7 +14,13 @@ const userRoutes = require('./routes/users');
 const app = express();
 
 // Middleware setup
-app.use(cors()); // Only for local development
+app.use(cors(
+    {
+        origin : "http://localhost:5173",
+        // this line let the server to set cookies at the client side
+        credentials : true
+    }
+)); // Only for local development
 app.use(express.json()); // Parse JSON bodies
 app.use(morgan('dev')); // Morgan for logging
 app.use(cookieParser())

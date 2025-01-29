@@ -39,3 +39,9 @@ app.get('/set-cookie', (req, res) => {
     res.cookie('name','Phyo Zaw Linn')
     res.send("cookie is sent");
 });
+
+// Example route for getting cookies
+app.get('/get-cookie', (req,res) => {
+    let cookies = req.cookies
+    return res.json(cookies)
+})

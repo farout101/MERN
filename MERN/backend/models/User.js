@@ -37,4 +37,19 @@ UserSchema.statics.register = async function(name,email,password) {
     return user;
 }
 
+UserSchema.statics.login = async function(email,password) {
+    let user = await this.findOne({email})
+    if(!user) {
+        throw new Error("User does not exit")
+    }
+
+    let isCorrect = await bcrypt.compare(password, user.password)
+    if(isCorrect) {
+        return user
+    } else {
+        throw new Error("Password Incorrect")
+    }
+}
+
+
 module.exports = mongoose.model("User", UserSchema)

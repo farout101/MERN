@@ -4,12 +4,23 @@ const createToken = require('../helpers/createToken')
 const cookieParser = require('cookie-parser')
 
 const UserController = {
-    login : (req,res) => {
-        return res.json({ msg : "This is from login" }) 
+    login : async (req,res) => {
+       try {
+            let {email,password} = req.body
+            let user = await User.login(email,password)
+
+            let token = createToken(user._id)
+            res.cookie('jwt', token, {httpOnly : true, maxAge : 3 * 24 * 60 * 60 * 1000}) // miliseconds
+            return res.json({user,token})
+       } catch (e) {
+            return res.status(400).json({error : e.message})
+       }
+         
     },
     register : async (req,res) => {
         try {
-            let user = await User.register(req.body.name, req.body.email, req.body.password)
+            let {name,email,password} = req.body
+            let user = await User.register(name,email,password)
             let token = createToken(user._id)
             res.cookie('jwt',token, { httpOnly : true, maxAge : 3 * 24 * 60 * 60 * 1000}) // maxAge here accept with miliseconds
             return res.json({ data: { user, token } })

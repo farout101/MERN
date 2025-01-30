@@ -1,6 +1,6 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from '../helpers/axios'
 
 export default function SigninForm() {
 
@@ -19,7 +19,7 @@ export default function SigninForm() {
                 password
             }
 
-            let res = await axios.post('http://localhost:4000/api/users/login', data, {
+            let res = await axios.post('/api/users/login', data, {
                 withCredentials : true
             })
             if(res.status === 200) {

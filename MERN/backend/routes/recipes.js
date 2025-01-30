@@ -1,4 +1,5 @@
 const ErrorMessageHandler = require('../Middlewares/ResponseErrorMessage')
+const AuthMiddleware = require('../Middlewares/AuthMiddleware')
 // Import the express module
 const express = require('express')
 const { body } = require('express-validator')
@@ -8,7 +9,7 @@ const RecipeController = require('../controller/RecipeController')
 const router = express.Router()
 
 // Define a route for GET requests to '' and map it to the index method of RecipeController
-router.get('', RecipeController.index)
+router.get('',RecipeController.index)
 router.post('',[
     body('title').notEmpty().escape(),
     body('description').notEmpty().escape(),

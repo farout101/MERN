@@ -21,13 +21,14 @@ export default function SignupForm() {
                 password
             }
 
-            res = await axios.post('http://localhost:4000/api/users/register', data, {
+            let res = await axios.post('http://localhost:4000/api/users/register', data, {
                 withCredentials : true
             })
             if(res.status === 200) {
                 navigate('/')
             }
         } catch (e) {
+            // console.log(e)
             setErrors(e.response.data.errors)
         }
     }

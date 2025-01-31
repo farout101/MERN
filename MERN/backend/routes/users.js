@@ -7,6 +7,7 @@ const UserController = require('../controller/UserController')
 const User = require('../models/User')
 
 router.post('/login', UserController.login)
+router.post('/logout', UserController.logout)
 router.post('/register', [
     body('name').notEmpty(),
     body('email').notEmpty().isEmail(),

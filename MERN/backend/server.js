@@ -9,6 +9,7 @@ const cors = require('cors');
 // Importing routes
 const recipeRoutes = require('./routes/recipes');
 const userRoutes = require('./routes/users');
+const AuthMiddleware = require('./Middlewares/AuthMiddleware')
 
 // Define the express app
 const app = express();
@@ -37,7 +38,7 @@ mongoose.connect(mongoURL).then(() => {
 });
 
 // Use the routes
-app.use('/api/recipes', recipeRoutes);
+app.use('/api/recipes', AuthMiddleware, recipeRoutes);
 app.use('/api/users', userRoutes);
 
 // Example route for setting cookies

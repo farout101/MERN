@@ -27,6 +27,14 @@ const UserController = {
         } catch (e) {
             return res.status(400).json({ error : e.message })
         }
+    },
+    logout : async (req,res) => {
+        try {
+            res.cookie('jwt','', {maxAge : 1} ) // maxAge here accept with miliseconds
+            return res.json({ message : "User Logged out" })
+        } catch (e) {
+            return res.status(400).json({error : e.message})
+        }
     }
 }
 

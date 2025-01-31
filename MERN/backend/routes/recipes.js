@@ -1,5 +1,4 @@
 const ErrorMessageHandler = require('../Middlewares/ResponseErrorMessage')
-const AuthMiddleware = require('../Middlewares/AuthMiddleware')
 // Import the express module
 const express = require('express')
 const { body } = require('express-validator')

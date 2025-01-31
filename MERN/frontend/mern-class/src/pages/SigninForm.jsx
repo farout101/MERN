@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext'
 import axios from '../helpers/axios'
 
 export default function SigninForm() {
 
     let navigate = useNavigate()
+    let {dispatch} = useContext(AuthContext)
 
     let [email,setEmail] = useState('')
     let [password,setPassword] = useState('')
@@ -23,6 +25,7 @@ export default function SigninForm() {
                 withCredentials : true
             })
             if(res.status === 200) {
+                dispatch({type : "LOGIN", payload : res.data.user})
                 navigate('/')
             }
         } catch (e) {

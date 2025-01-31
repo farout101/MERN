@@ -2,17 +2,17 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext'
 import axios from '../helpers/axios'
-
 export default function Navbar() {
 
     const navigate = useNavigate()
 
-    let {name} = useContext(AuthContext)
+    let { user, dispatch} = useContext(AuthContext)
 
     let logout = async () => {
         alert("logged out")
         let res = await axios.post('/api/users/logout')
         if(res.status === 200) {
+            dispatch({type : "LOGOUT"})
             navigate('/sign-in')
         }
     }
@@ -30,9 +30,13 @@ export default function Navbar() {
                 <li className="relative group">
                     <button className="hover:text-orange-500 transaction duration-300 ease-in-out">Account</button>
                     <ul className="absolute left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-white shadow-lg">
-                        <li><Link to="/sign-up" className="block px-4 py-2 hover:bg-gray-100">Register</Link></li>
-                        <li><Link to="/sign-in" className="block px-4 py-2 hover:bg-gray-100">Login</Link></li>
-                        <li><button onClick={logout} className="block px-4 py-2 hover:bg-gray-100">Logout</button></li>
+                        {!user && (
+                            <>
+                                <li><Link to="/sign-up" className="block px-4 py-2 hover:bg-gray-100">Register</Link></li>
+                                <li><Link to="/sign-in" className="block px-4 py-2 hover:bg-gray-100">Login</Link></li>
+                            </>
+                        )}
+                        {!!user && (<li><button onClick={logout} className="block px-4 py-2 hover:bg-gray-100">Logout</button></li>)}
                     </ul>
                 </li>
             </ul>

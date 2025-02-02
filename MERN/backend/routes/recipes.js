@@ -26,7 +26,18 @@ router.post('', [
 router.get('/:id', RecipeController.show)
 
 // Define a route for POST requests to '/:id/upload' with file upload handling
-router.post('/:id/upload', upload.single('photo'), RecipeController.upload)
+router.post('/:id/upload', [
+    upload.single('photo'),
+    body('photo').custom((value, {req}) => {
+        if(!req.file) {
+            throw new Error("Photo is required")
+        }
+        if(!req.file.mimetype.startsWith('image')) {
+            throw new Error("Photo must be image")
+        }
+        return true
+    })
+], ErrorMessageHandler,RecipeController.upload)
 
 // Define a route for DELETE requests to '/:id' and map it to the delete method of RecipeController
 router.delete('/:id', RecipeController.delete)

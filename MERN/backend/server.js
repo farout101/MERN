@@ -15,6 +15,7 @@ const AuthMiddleware = require('./Middlewares/AuthMiddleware')
 const app = express();
 
 // Middleware setup
+app.use(express.static('public'))
 app.use(cors(
     {
         origin : "http://localhost:5173",

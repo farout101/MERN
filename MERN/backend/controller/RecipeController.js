@@ -98,8 +98,16 @@ const RecipeController = {
         } catch(e) {
             return res.status(404).json({ msg : "Internal Server Error!"})
         }
+    },
+    upload : (req,res) => {
+        try {
+            console.log(req.file)
+            return res.json({ msg : 'image uploaded' })
+        } catch(e) {
+            console.log(e)
+            return res.status(400).json({error : e})
+        }
     }
-
 }
 
 module.exports = RecipeController

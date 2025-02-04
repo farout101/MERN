@@ -14,6 +14,8 @@ export default function RecipeForm() {
   let [title,setTitle] = useState('')
   let [description,setDescription] = useState('')
   let [errors,setErrors] = useState([])
+  let [file, setFile] = useState(null)
+  let [preview,setPreview] = useState('')
 
   useEffect(() => {
     let fetchRecipe = async () => {
@@ -50,12 +52,38 @@ export default function RecipeForm() {
       } else {
         res = await axios.post('/api/recipes', recipe)
       }
+
+      let formData = new FormData
+      formData.set('photo',file)
+    
+      let uploadRes = await axios.post(`/api/recipes/${res.data._id}/upload`, formData, {
+        headers: {
+          Accept: "multipart/form-data"
+        }
+      })
+      
+      console.log(uploadRes)
+
       if(res.status === 200) {
         navigate('/')
       }
     } catch(e) {
       setErrors(Object.keys(e.response.data.errors))
     }
+  }
+
+  let upload = (e) => {
+    let file = e.target.files[0]
+    setFile(file)
+
+    //preview (Use file reader from JS)
+    let fileReader = new FileReader
+
+    fileReader.onload = (e) => {
+      setPreview(e.target.result)
+    }
+
+    fileReader.readAsDataURL(file)
   }
 
   return (
@@ -67,6 +95,8 @@ export default function RecipeForm() {
                 <li className='text-red-500 text-sm' key={i}>{error} is invalid value!</li>
               ))}
             </ul>
+            <input type="file" onChange={upload}/>
+            {!!preview && <img src={preview} alt="image" />}
             <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder='Recipe Title' className='w-full p-1'/>
             <textarea value={description} onChange={e => setDescription(e.target.value)} name="" id="" placeholder='Recipe Description' className='w-full p-1' rows="5"></textarea>
             <div className='flex space-x-2 items-center'>

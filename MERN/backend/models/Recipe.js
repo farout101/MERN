@@ -15,6 +15,9 @@ const RecipeSchema = new Schema({
     ingredients : {
         type : Array,
         required : true
+    },
+    photo : {
+        type : String
     }
 }, { timestamps : true })
 

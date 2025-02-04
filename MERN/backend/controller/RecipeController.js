@@ -99,10 +99,20 @@ const RecipeController = {
             return res.status(404).json({ msg : "Internal Server Error!"})
         }
     },
-    upload : (req,res) => {
+    upload : async (req,res) => {
         try {
-            console.log(req.file)
-            return res.json({ msg : 'image uploaded' })
+            let id = req.params.id
+            if(!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ msg : 'Not a valid ID!' })
+            }
+            let recipe = await Recipe.findByIdAndUpdate(id, {
+                photo : '/' + req.file.filename
+            })
+            if(!recipe) {
+                return res.status(404).json({ msg : 'Recipe not found' })
+            }
+            let updatedRecipe = await Recipe.findByIdAndUpdate(id, req.body, { new: true })
+            return res.json(updatedRecipe)
         } catch(e) {
             console.log(e)
             return res.status(400).json({error : e})

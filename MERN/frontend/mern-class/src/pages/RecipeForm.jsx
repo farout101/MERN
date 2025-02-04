@@ -25,6 +25,7 @@ export default function RecipeForm() {
           setTitle(res.data.title)
           setDescription(res.data.description)
           setIngredients(res.data.ingredients)
+          setPreview(res.data.photo)
         }
       }
     }

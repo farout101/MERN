@@ -40,11 +40,13 @@ export default function Home() {
   };
 
   return (
-    <div className='space-y-4'>
+    <>
+      <div className='grid grid-cols-3 space-y-4'>
       {!!recipes.length && recipes.map((recipe) => (
         <RecipeCard recipe={recipe} key={recipe._id} onDeleted={onDeleted} />
       ))}
+      </div>
       {!!links && <Pagination links={links} page={page} />}
-    </div>
+    </>
   );
 }

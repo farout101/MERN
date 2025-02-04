@@ -3,9 +3,11 @@ const router = express.Router()
 const ErrorMessageHandler = require('../Middlewares/ResponseErrorMessage')
 const { body } = require('express-validator')
 
+const AuthMiddleware = require('../Middlewares/AuthMiddleware')
 const UserController = require('../controller/UserController')
 const User = require('../models/User')
 
+router.get('/me', AuthMiddleware, UserController.me)
 router.post('/login', UserController.login)
 router.post('/logout', UserController.logout)
 router.post('/register', [

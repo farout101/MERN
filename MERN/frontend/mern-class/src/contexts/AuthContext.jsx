@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useReducer } from "react";
 
 const AuthContext = createContext()
@@ -25,17 +26,22 @@ const AuthContextProvider = ({children}) => {
     })
 
     useEffect(() => {
-        try {
-            let user = JSON.parse(localStorage.getItem('user'))
-            if(user) {
-                dispatch({type : 'LOGIN', payload : user})
-            } else {
-                dispatch({type : 'LOGOUT', })
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get('/api/users/me');
+                let user = res.data;
+                if (user) {
+                    dispatch({ type: 'LOGIN', payload: user });
+                } else {
+                    dispatch({ type: 'LOGOUT' });
+                }
+            } catch (e) {
+                dispatch({ type: 'LOGOUT' });
             }
-        } catch (e) {
-            dispatch({type : 'LOGOUT'})
-        }
-    },[])
+        };
+
+        fetchUser();
+    }, []);
 
     return (
         <AuthContext.Provider value={{...state, dispatch}}>

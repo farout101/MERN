@@ -35,6 +35,9 @@ const UserController = {
         } catch (e) {
             return res.status(400).json({error : e.message})
         }
+    },
+    me : (req,res) => {
+        return res.json(req.user)
     }
 }
 

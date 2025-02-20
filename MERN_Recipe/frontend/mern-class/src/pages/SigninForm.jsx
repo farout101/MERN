@@ -25,7 +25,7 @@ export default function SigninForm() {
                 withCredentials : true
             })
             if(res.status === 200) {
-                dispatch({type : "LOGIN", payload : res.data.user})
+            dispatch({type : "LOGIN", payload : res.data.user})
                 navigate('/')
             }
         } catch (e) {

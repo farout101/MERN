@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const nodemailer = require('nodemailer')
 
 // Importing routes
 const recipeRoutes = require('./routes/recipes');
@@ -52,4 +53,28 @@ app.get('/set-cookie', (req, res) => {
 app.get('/get-cookie', (req,res) => {
     let cookies = req.cookies
     return res.json(cookies)
+})
+
+app.get('/send-email', async (req,res) => {
+    // Looking to send emails in production? Check out our Email API/SMTP product!
+    var transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+        user: "bc6df0fef072e7",
+        pass: "b139ea020f22d7"
+        }
+    });
+    
+    const info = await transport.sendMail({
+        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+        to: "phyozawlinn1852020@gmail.com", // list of receivers
+        subject: "Hello ✔", 
+        text: "Hello world?", 
+        html: "<b>Hello world?</b>", 
+    });
+    
+    console.log("Message sent: %s", info.messageId);
+    
+    return res.send("email already sent")
 })

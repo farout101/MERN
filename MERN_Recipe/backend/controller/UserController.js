@@ -1,7 +1,5 @@
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
 const createToken = require('../helpers/createToken')
-const cookieParser = require('cookie-parser')
 
 const UserController = {
     login : async (req,res) => {

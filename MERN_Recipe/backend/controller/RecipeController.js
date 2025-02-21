@@ -3,17 +3,16 @@ const mongoose = require('mongoose')
 const removeFile = require('../helpers/removefile')
 const sendEmail = require("../helpers/sendEmail")
 const User = require("../models/User")
-const Queue = requrie("bull")
+const Queue = require("bull")
 
 const emailQueue = new Queue('email Queue', {
     redis : {port: 6379, host: '127.0.0.1'}
 })
 
 emailQueue.process(async (job) => {
-    let users = await User.find(null,['email'])
-    let emails = users.map(user => user.email)
-    emails = emails.filter(email => email != req.user.email)
-    await sendEmail(job.data) 
+    setTimeout(async () => {
+        await sendEmail(job.data)
+    }, 5000);
 })
 
 const RecipeController = {
@@ -63,6 +62,9 @@ const RecipeController = {
                 description,
                 ingredients
             })
+            let users = await User.find(null,['email'])
+            let emails = users.map(user => user.email)
+            emails = emails.filter(email => email != req.user.email)
             emailQueue.add({
                 view: 'email',
                 data: {

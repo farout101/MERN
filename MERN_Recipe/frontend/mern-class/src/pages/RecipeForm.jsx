@@ -72,6 +72,7 @@ export default function RecipeForm() {
         navigate('/')
       }
     } catch(e) {
+      setLoading(false)
       setErrors(Object.keys(e.response.data.errors))
     }
   }

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const nodemailer = require('nodemailer')
+const sendEmail = require('./helpers/sendEmail')
 
 // Importing routes
 const recipeRoutes = require('./routes/recipes');
@@ -27,6 +27,9 @@ app.use(cors(
 app.use(express.json()); // Parse JSON bodies
 app.use(morgan('dev')); // Morgan for logging
 app.use(cookieParser())
+
+app.set('views','./views')
+app.set('view engine','ejs')
 
 // MongoDB connection
 const mongoURL = "mongodb://localhost:27017/faroutDB";
@@ -56,25 +59,18 @@ app.get('/get-cookie', (req,res) => {
 })
 
 app.get('/send-email', async (req,res) => {
-    // Looking to send emails in production? Check out our Email API/SMTP product!
-    var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-        user: "bc6df0fef072e7",
-        pass: "b139ea020f22d7"
-        }
-    });
-    
-    const info = await transport.sendMail({
-        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
-        to: "phyozawlinn1852020@gmail.com", // list of receivers
-        subject: "Hello ✔", 
-        text: "Hello world?", 
-        html: "<b>Hello world?</b>", 
-    });
-    
-    console.log("Message sent: %s", info.messageId);
-    
-    return res.send("email already sent")
+    try {
+        await sendEmail({
+            view: 'email',
+            data: {
+                name: "AungAung"
+            },
+            from: "maungmaung@gmail.com",
+            to: "aungaung@gmail.com",
+            subject: "No Subject"
+        }) 
+        return res.send("email is already sent")
+    } catch(e) {
+        return res.status(500).json({message : e.message});
+    }
 })
